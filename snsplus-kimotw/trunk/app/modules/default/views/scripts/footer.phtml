@@ -1,0 +1,147 @@
+<div style="width:750px;">
+<iframe width="750px" height="160px" frameborder="0" scrolling="no" src="{%$staticUrl%}/html/b/index.html?v=2011062201"></iframe>
+<div id="footer" style="text-align:center;font-size:12px;">小島門牌號: {%$uid%}{% if $hfDev == 1 %}<span id="userinfo" style="color:red;"></span>{% /if %}</div>
+</div>
+
+<script type="text/javascript">
+	var fconfig = {
+        appUrl:"http://tw.socialgame.yahoo.net/userapp/userapp.php?appid={%$smarty.const.APP_ID%}/",
+        appId:"{%$appId%}",
+        appKey:"{%$appKey%}",
+        userId:"{%$uid%}",
+        userName:"{%$uname%}",
+		platformUid:"{%$platformUid%}",
+		staticUrl:"{%$staticUrl%}",
+        gameMode:"opaque"
+    };
+
+	function goPay()
+	{
+		window.location = '{%$hostUrl%}/pay/top';
+		return;
+	}
+
+	function returnGift()
+	{
+		location.href = "{% $hostUrl %}/gift/top";
+	}
+
+	function inviteFriend()
+	{
+		location.href = "{% $hostUrl %}/invite/top";
+	}
+
+	function goInvite()
+	{
+		location.href = "{% $hostUrl %}/invite/top";
+	}
+	
+	function sendFeed(feed)
+	{
+		if (FIRST_LOGIN == '1') {
+			return;
+		}
+		var feedSettings = $.parseJSON(feed);
+		HFApp.feed(feedSettings);
+	}
+
+	function sendNormalFeed()
+	{
+		var feedSettings = new Object();
+		feedSettings.text = '陽光？沙灘？美女？帥哥！盡在快樂島主！趕快加入吧~';
+		feedSettings.imgUrl = '{%$staticUrl%}/apps/island/images/feed/join.gif';
+		feedSettings.linktext = '快來玩吧！';
+		feedSettings.templateContent = '快来一起玩吧~';
+    	HFApp.feed(feedSettings);
+    	return;
+	}
+
+	function sendUserLevelUpFeed(flag)
+	{
+		if (FIRST_LOGIN == '1') {
+			return;
+		}
+
+		var feedSettings = new Object();
+		if (flag == 1) {
+			feedSettings.text = '{%$uname%}的小島在他的努力下又變大了！你們羡慕嗎~那一起來玩吧！';
+			feedSettings.imgUrl = '{%$staticUrl%}/apps/island/images/feed/island_level_up.gif';
+			feedSettings.linktext = '去看看';
+			feedSettings.templateContent = '敢不敢來比一比！';
+
+		} else {
+			feedSettings.text = '{%$uname%}的小島升級了！去瀏覽還能拿到免費禮物哦！快去看看吧！';
+			feedSettings.imgUrl = '{%$staticUrl%}/apps/island/images/feed/user_level_up.gif';
+			feedSettings.linktext = '去看看';
+			feedSettings.templateContent = '有膽你就來！';
+		}
+		HFApp.feed(feedSettings);
+	}
+
+	function sendDailyTaskFeed()
+	{
+		if (FIRST_LOGIN == '1') {
+			return;
+		}
+		var feedSettings = new Object();
+		feedSettings.text = '{%$uname%}通過一天的努力，所有日常任務都完成了哦！鼓掌~';
+		feedSettings.imgUrl = '{%$staticUrl%}/apps/island/images/feed/daily_mission_complete.gif';
+		feedSettings.linktext = '去看看';
+		feedSettings.templateContent = '努力就有回報，不要羡慕我哦！';
+		HFApp.feed(feedSettings);
+	}
+
+	function sendTeamBuyFeed()
+    {
+		if (FIRST_LOGIN == '1') {
+			return;
+		}
+		var ajaxurl = "{%$hostUrl%}/event/sendteambuyfeed";
+		$.ajax({
+			   type: "post",
+			   url: ajaxurl,
+			   dataType: "text",
+			   success: function(msg){
+					sendFeed(msg);
+			   }
+		});
+    }
+
+	function sendTaojishiFeed()
+    {
+		var ajaxurl = "{%$hostUrl%}/event/sendtaojishifeed";
+		$.ajax({
+			   type: "post",
+			   url: ajaxurl,
+			   dataType: "text",
+			   success: function(msg){
+				   sendFeed(msg);
+			   }
+			});
+    }
+
+	function sendStromFeed()
+    {
+		if (FIRST_LOGIN == '1') {
+			return;
+		}
+
+		var ajaxurl = "{%$hostUrl%}/event/sendstromfeed";
+		$.ajax({
+			   type: "post",
+			   url: ajaxurl,
+			   dataType: "text",
+			   success: function(msg){
+					sendFeed(msg);
+			   }
+		});
+    }
+
+	var FIRST_LOGIN = '{%$newuser%}';
+    if (FIRST_LOGIN == '1') {
+    	sendNormalFeed();
+    }
+</script>
+
+</body>
+</html>

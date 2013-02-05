@@ -1,0 +1,92 @@
+
+<script src="{%$staticUrl%}/js/jquery-1.4.3.min.js" type="text/javascript"></script>
+<script src="{%$staticUrl%}/js/jquery.flashSlider-1.0.min.js" type="text/javascript"></script>
+<link href="{%$staticUrl%}/apps/island/main_2011041101.css?v=1.01" rel="stylesheet" type="text/css" />
+<link href="{%$staticUrl%}/apps/island/pay_2011031501.css?v=1.00" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    html, body { height:100%; }
+    body { margin:0; }
+</style>
+
+<div class="main">
+
+	<div class="chongzhicontent" padding-left="20px;">
+		<img src="{%$user.face%}" width="59" height="60" />
+		<div class="xinxi">
+			<div class="cname">{%$user.name|escape%}</div>
+			<div class="shuzi">寶石： <span style="color:#3c7e9a;font-weight:bold;">{%$user.gold%}</span></div>
+		</div>
+	</div>
+
+	<div class="table">
+		<ul>
+    		<li style="width:50px"></li>
+    		<li><a href="javascript:void(0);"><div class="nav_01">充值寶石</div></a></li>
+    		<li><a href="javascript:void(0);" onclick="payLog();"><div class="nav_02">充值記錄</div></a></li>
+    		<li><a href="javascript:void(0);" onclick="paySystem();"><div class="nav_02">系統贈送</div></a></li>
+    		<li><a href="javascript:void(0);" onclick="consGold(0);"><div class="nav_02">寶石消耗記錄</div></a></li>
+			<li><a href="javascript:void(0);" onclick="consCoin();"><div class="nav_02">金幣消耗記錄</div></a></li>
+		</ul>
+	</div>
+	<br />
+
+		<div class="content" style="padding-top:3px;padding-left:4px;width:740px;">
+			<!-- <div>
+				<img src="{%$staticUrl%}/apps/island/images/pay/paybanner/pay03.jpg" />
+			</div> -->
+			<div style="color:red;padding:0 0 10px 10px;">
+				<font color="red" size="2px;"><b>儲值好禮再升級，老的儲值送又來嘍，儲值就有建築拿。</b></font><br />
+				<!-- <font color="red" size="2px;"><b>活動期間首次儲值還可免費獲取驚喜大禮包！</b></font>-->
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<br /><br />
+				<font color="blue" size="2px;"><b>
+					單次儲值滿13寶石可獲得獎勵「加送4寶石、刷鱼卡*1、资质石*6、5星建築熱氣球場」<br />
+					單次儲值滿27寶石可獲得獎勵「加送10寶石、刷鱼卡*3、资质石*15、5星建築直升飛機場」<br />
+					單次儲值滿54寶石可獲得獎勵「加送25寶石、刷鱼卡*7、资质石*35、5星建築旋翼飛機場」<br />
+					單次儲值滿183寶石可獲得獎勵「加送90寶石、刷鱼卡*15、资质石*75、5星建築火箭發射場，5星建筑ufo停靠場」<br />
+				</b></font><br />
+			</div>
+
+			<input type="hidden" name="entrance" id="entrance" value="{% if $connectSnsplus %}connect{% /if %}" />
+			<div class="chongzhi" style="margin:-3px 0 0 0;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/apps/island/images/pay/2011-12-21/chongzhi_011.gif"  id="dm11" class="diamond" title="兑换10宝石" /><br />
+						<input type="submit" name="btnOrder11" id="btnOrder11" value="儲值" class="orderbtn" class="diamond" onclick="goToPaySNS('{% if $connectSnsplus %}{%$connectSnsplus%}{% /if %}');" />
+					</p>
+					<label></label>
+				</div>
+			</div>
+			<div class="chongzhi" style="margin:-3px 0 0 0;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/apps/island/images/pay/v2012061501/chongzhi_01.gif"  id="dm1" class="diamond" title="兑换100宝石" /><br />
+						<input type="submit" name="btnOrder1" id="btnOrder1" value="儲值" class="orderbtn" class="diamond" onclick="goToPaySNS('{% if $connectSnsplus %}{%$connectSnsplus%}{% /if %}');" />
+					</p>
+					<label></label>
+				</div>
+			</div>
+			<div class="chongzhi" style="margin:-3px 0 0 0;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/apps/island/images/pay/v2012061501/chongzhi_02.gif" id="dm2" class="diamond" title="兑换200宝石，送20宝石" /><br />
+						<input type="submit" name="btnOrder2" id="btnOrder2" value="儲值" class="orderbtn" class="diamond" onclick="goToPaySNS('{% if $connectSnsplus %}{%$connectSnsplus%}{% /if %}');" />
+					</p>
+					<label></label>
+				</div>
+			</div>
+			<div class="chongzhi" style="margin:-3px 0 0 0 ;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/apps/island/images/pay/v2012061501/chongzhi_03.gif" id="dm3" class="diamond" title="兑换500宝石，送60宝石"/><br />
+						<input type="submit" name="btnOrder3" id="btnOrder3" value="儲值" class="orderbtn" class="diamond" onclick="goToPaySNS('{% if $connectSnsplus %}{%$connectSnsplus%}{% /if %}');" />
+					</p>
+					<label></label>
+				</div>
+			</div>
+			<div class="chongzhi" style="margin:-3px 0 0 0;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/apps/island/images/pay/v2012061501/chongzhi_04.gif" id="dm4" class="diamond" title="兑换1000宝石，送140宝石"/><br />
+						<input type="submit" name="btnOrder4" id="btnOrder4" value="儲值" class="orderbtn" class="diamond" onclick="goToPaySNS('{% if $connectSnsplus %}{%$connectSnsplus%}{% /if %}');" />
+					</p>
+					<label></label>
+				</div>
+			</div>
+		</div>
+</div>

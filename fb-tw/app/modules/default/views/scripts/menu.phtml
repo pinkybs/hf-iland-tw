@@ -1,0 +1,166 @@
+<div style="margin-left:0px">
+<iframe src="http://ad2.snsplus.com/bulletin/header.php?gid=18&block_id=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:760px; height:190px;" allowTransparency="true"></iframe>
+</div>
+
+<script src="{%$staticUrl%}/js/jquery-1.4.3.min.js" type="text/javascript"></script>
+<script src="{%$staticUrl%}/js/jquery.flashSlider-1.0.min.js" type="text/javascript"></script>
+<style type="text/css">
+<!--
+.zleft{ float:left;}
+.zclear{ clear:both;}
+.bo_1,.bo_2,.bo_3,.bo_4,.bo_5,.bo_6,.bo_7{ padding-right:5px;}
+.renwu{ width:750px; height:28px; padding-bottom:2px; background:url({%$staticUrl%}/apps/island/images/guide/bg.gif) no-repeat; width:747px; height:28px; background-color:#d5f9f5;}
+.renwu div{ position:relative}
+.banner{ padding-bottom:2px;}
+div#fanbox {
+    background:none repeat scroll 0 0 #FFFFFF;
+    border-color:#6D84B4;
+    border-style:none solid solid;
+    border-width:0 10px 10px;
+    left:140px;
+    overflow:hidden;
+    position:absolute;
+    display:none;
+    top:110px;
+    width:293px;
+    height:380px;
+}
+
+div#fanbox #fan_title {
+    background:none repeat scroll 0 0 #6D84B4;
+    border-bottom:1px solid #AAAAAA;
+    color:white;
+    height:28px;
+    line-height:28px;
+    overflow:hidden;
+    padding:0 10px;
+    text-align:right;
+}
+div#fanbox #fan_title a {
+	color:white;
+	font-weight:bold;
+}
+-->
+</style>
+
+{% if $pgiftTF eq "0" %}
+<div id="percent">
+	<div class="renwu">
+	{% if $isfanTF eq "0" %}
+    <div id="id_complete_isfan" style="position:absolute; left:221px;"><input type="image" src="{%$staticUrl%}/apps/island/images/guide/fan.gif" width="110" height="28" onclick="complete_fan(); return false;" /></div>
+	{% /if %}
+	</div>
+	<div id="fanbox">
+    <div id="fan_title"><a href="#" onclick="close_complete_fan();">關閉</a></div>
+    {% if $smarty.const.APP_ID==117523854945742 %}
+	<iframe src="{%$smarty.const.HTTP_PROTOCOL%}www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fapps%2Fapplication.php%3Fid%3D117523854945742&amp;width=292&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false&amp;height=350" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:350px;" allowTransparency="true"></iframe>
+	{% elseif $smarty.const.APP_ID==130346993713055 %}
+    <iframe src="{%$smarty.const.HTTP_PROTOCOL%}www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fapps%2Fapplication.php%3Fid%3D130346993713055&amp;width=292&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false&amp;height=350" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:350px;" allowTransparency="true"></iframe>
+    {% else %}
+    <!-- <iframe src="{%$smarty.const.HTTP_PROTOCOL%}www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fapps%2Fapplication.php%3Fid%3D125043264175761&amp;width=302&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false&amp;height=350" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:302px; height:350px;" allowTransparency="true"></iframe> -->
+    <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fhpisland&amp;width=302&amp;height=350&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=true&amp;appId=125043264175761" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:302px; height:350px;" allowTransparency="true"></iframe>
+    {% /if %}
+	</div>
+</div>
+{% /if %}
+
+{%include file="cmscript.phtml"%}
+<div class="title">
+	<div class="menu">
+        <ul style="padding-left:150px;width:700px;">
+        	<li style="width:73px;"><a href="{% if $connectSnsplus %}{%$hostUrl%}?{%$connectSnsplus%}{% else %}{%$smarty.const.HTTP_PROTOCOL%}apps.facebook.com/{%$smarty.const.APP_NAME%}/{% /if %}" target="_top"><img src="{%$staticUrl%}/apps/island/images/menu/v2/home.gif" title="我的小島" alt="我的小島" /></a></li>
+        	<li style="width:85px;"><a id="mnuInvite" href="javascript:void(0);" onclick="goInvite('{% if $connectSnsplus %}{%$connectSnsplus%}{% /if %}');"><img src="{%$staticUrl%}/apps/island/images/menu/v2/invite.gif" title="邀請朋友" alt="邀請朋友" /></a></li>
+        	<li style="width:73px;"><a id="mnuGift" href="javascript:void(0);" onclick="topGift();"><img src="{%$staticUrl%}/apps/island/images/menu/v2/gift.gif" title="贈送禮物" alt="贈送禮物" /></a></li>
+        	<li style="width:95px;padding-top:6px;"><a id="mnuPay" href="javascript:void(0);" onclick="topPay();"><img src="{%$staticUrl%}/apps/island/images/menu/pay/pay2012061501.gif" title="兌換寶石" alt="兌換寶石" /></a></li>
+        	<li style="width:65px;"><a href="http://www.facebook.com/hpisland" target="_blank"><img src="{%$staticUrl%}/apps/island/images/menu/v2/forum.gif" title="玩家論壇" alt="玩家論壇" /></a></li>
+        	<li style="width:65px;"><a href="{%$faqUrl%}" target="_blank"><img src="{%$staticUrl%}/apps/island/images/menu/v2/help.gif" title="幫助" alt="幫助" /></a></li>
+			<li style="width:104px;"><a href="{% $snsUrl %}" target="_blank"><img src="{%$staticUrl%}/apps/island/images/menu/v2/bo_4.gif" border="0" /></a>
+        </ul>
+	</div>
+</div>
+    {% if $showNotice == true %}
+	  <div class="guang" style="margin-top:5px;">
+    	  <div class="guang_b" style="clear:both;">
+    	  <!-- <a href="http://bit.ly/w4xL4a" target="_blank"><img src="{%$staticUrl%}/apps/island/images/menu/v2/li.gif" border="0" style="float:right;width:135px;height:28px;" /></a> -->
+    	  <a href="{%$smarty.const.HTTP_PROTOCOL%}www.snsplus.com/channel/index/game/fbisland_tw?sl=default" target="_blank"><img src="{%$staticUrl%}/apps/island/images/menu/v2/start_in.gif" border="0" style="float:right;width:135px;height:28px;" /></a> </div>
+    	  <div style="clear:both;"></div>
+	  {% foreach from=$mainNotice item=data %}
+    	  <div class="zleft guang_z">{%if $data.link%}<a href="{%$data.link%}" target="_blank">[{%$data.create_time|date_format:"%Y-%m-%d"%}]  {%$data.title%}</a>{%else%}[{%$data.create_time|date_format:"%Y-%m-%d"%}]  {%$data.title%}{%/if%}</div>
+    	 {% /foreach %}
+</div>
+{% /if %}
+<script src="{%$staticUrl%}/js/jquery.flashSlider-1.0.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery("#slider").flashSlider({controlsShow: false,vertical: true, speed: 1500, pause: 6000});
+    });
+
+	function reloadIsland()
+	{
+		var showUrl = "?signed_request="+signed_request;
+		self.location.href = showUrl;
+		return;
+	}
+</script>
+
+<script type="text/javascript">
+	var appName = "{% $smarty.const.APP_NAME %}";
+	var iswatch = "{% $iswatch %}";
+
+	function complete_fan() {
+		$("#fanbox").css('display', "block");
+	}
+
+	function close_complete_fan() {
+		$("#fanbox").css('display', "none");
+		check_permission();
+	}
+
+	function check_permission() {
+		$.ajax({
+			type: "POST",
+			url: "{% $hostUrl %}/callback/permission",
+			data: "",
+			success: function(rsp){
+				if ( rsp == 1 ) {
+					var appName = "{% $smarty.const.APP_NAME %}";
+					$("#id_complete_isfan").css("display", "none");
+					$("#percent").fadeOut("slow", function() {
+						//window.location.reload();
+						parent.location.href="{%$smarty.const.HTTP_PROTOCOL%}apps.facebook.com/" + appName;
+					});
+				} else if ( rsp == -1 ) {
+					if (iswatch != 1) {
+						parent.location.href="{%$smarty.const.HTTP_PROTOCOL%}www.facebook.com/dialog/oauth?client_id={%$smarty.const.APP_ID%}" + "&scope=email,read_stream,user_likes&redirect_uri=" + encodeURI("{%$smarty.const.HTTP_PROTOCOL%}apps.facebook.com/{%$smarty.const.APP_NAME%}/");
+					}
+				} else {
+					$("#id_complete_isfan").css("display", "block");
+				}
+				//$("#id_complete_isfan").css("display", "block");
+			}
+		});
+	}
+	$(document).ready(function(){
+		//check_permission();
+		if ('1' == '{%$pgiftTF%}') {
+			$(".main").css("height", "930");
+		}
+		else {
+			check_permission();
+		}
+	});
+</script>
+
+<div id="giftBox" style="width:750px; height:900px;position:absolute;left:5px;top:328px;display:none;margin-top:-2px;margin-left:-5px;">
+    <div style="color:blue;position: absolute; left:720px;top:-15px;"><a id="mnuGiftCls" href="javascript:void(0);"><img src="{%$staticUrl%}/apps/island/images/common/btnClose.png" /></a></div>
+    <div id="divGiftFrame" style=""></div>
+</div>
+
+<div id="inviteBox" style="width:750px; height:700px;position:absolute;left:5px;top:260px;display:none;background-color:white;margin-top:-16px;margin-left:-5px;">
+    <div style="position: absolute; left:720px;top:8px;"><a id="mnuInviteCls" href="javascript:void(0);"><img src="{%$staticUrl%}/apps/island/images/common/btnClose.png" /></a></div>
+    <div id="divInviteFrame" style=""></div>
+</div>
+<div id="payBox" style="width:750px; height:700px;position:absolute;left:5px;top:260px;display:none;background-color:white;margin-top:-16px;margin-left:-5px;">
+    <div style="position: absolute; left:720px;top:8px;"><a id="mnuPayCls" href="javascript:void(0);"><img src="{%$staticUrl%}/apps/island/images/common/btnClose.png" /></a></div>
+    <div id="divPayFrame" style=""></div>
+</div>

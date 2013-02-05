@@ -1,0 +1,111 @@
+<!-- <a href="#" onclick="testa();">testfeed</a>&nbsp;<a href="#" onclick="testb();">testfan</a> -->
+<link rel="stylesheet" href="http://game.snsplus.com/css/common/snsplus.css?v=1.79" type="text/css" media="screen" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://game.snsplus.com/js/libs/dialog/artDialog.min.js?v=1.79"></script>
+<script type="text/javascript" src="http://game.snsplus.com/js/libs/platform/api.js?v=1.79"></script>
+<script type="text/javascript" src="http://game.snsplus.com/js/libs/platform/yahoo/api.js?v=1.79"></script>
+<script type="text/javascript">
+var SITE_URL = 'http://game.snsplus.com';
+var API_KEY = '{% $smarty.const.APP_KEY %}';
+
+function testa()
+{
+	//snsplus.application.load();
+	var message = "在IBM计划的未来，一切都皆可沟通。目前IBM已宣布了一项新的软件开发工具包，Mote Runner，这工具允许程序员把从咖啡壶到环境监测系统这样的任何东西放到“物联网”上。";
+	var caption = "CSDN新闻";
+	var link = "http://apps.facebook.com/mymajiapp";
+	var name = "BM推出Mote Runner项目 互联网将无处不在";
+	var description = "微机电系统和传感器制造商MEMSIC，正计划在其IRIS 传感器上使用 Mote Runner。";
+	var picture = "http://www.snsplus.com/images/logo.png";
+	snsplus.feed.publish(message, name, link, caption, description, picture, function(status){
+		alert(status);
+	});
+
+	alert(HFApp.getGameUrl());
+
+}
+
+function testb()
+{
+	snsplus.platform.showFansDialog(
+		    function(fans){
+		       alert(fans);
+		    });
+
+	snsplus.platform.isFan(
+		    function(fans){
+		       alert(fans);
+		    }
+		    );
+}
+
+var HFApp = {
+		appKey: API_KEY,
+		appUrl: "http://tw.socialgame.yahoo.net/userapp/userapp.php?appid={%$smarty.const.APP_ID%}",
+
+		home: function() {
+			window.top.location = HFApp.appUrl;
+			return;
+		},
+
+		invite: function(inviteSig) {
+			var dt = new Date();
+			var params = {};
+			params['hf_uid'] = inviteSig;
+			params['hf_sig'] = dt.getTime() + '|' + Math.random() + '|' + inviteSig;
+			snsplus.platform.invite(params);
+	    },
+
+	    feed: function(feedSettings) {
+			try {
+				if (feedSettings) {
+					var title = '快樂島主';
+					var content = feedSettings.text;
+					var templateContent = ' ';//'分享这一刻，来说点什么吧';
+					if (feedSettings.templateContent!=undefined && feedSettings.templateContent) {
+						templateContent = feedSettings.templateContent;
+					}
+					var pic = feedSettings.imgUrl;
+					var link = HFApp.appUrl;
+					var actionUrl = HFApp.appUrl;
+					var actionText = '快來玩吧！';
+					if (feedSettings.linktext!=undefined && feedSettings.linktext) {
+						actionText = feedSettings.linktext;
+					}
+					if (feedSettings.para!=undefined && feedSettings.para) {
+						actionUrl += 'index?' + feedSettings.para;
+						link += 'index?' + feedSettings.para;
+					}
+
+			    	snsplus.feed.publish(templateContent, title, actionUrl, actionText, content, pic, function(status){
+			    		alert(status);
+			    	});
+				}
+			}catch(e){}
+	    },
+
+		getGameUrl: function() {
+			return snsplus.application.getApplicationUrl();
+		},
+
+		getPayUrl: function() {
+			snsplus.api.getPaymentUrl(
+				function(url) {alert(url);}
+				, true);
+		},
+
+		isFan: function() {
+			snsplus.api.platform.isFan(function(state){
+				alert(state);
+			});
+		},
+
+		showFansDialog: function() {
+			snsplus.platform.showFansDialog(function(fans){
+			    alert(fans);
+			});
+		}
+	}
+
+
+</script>
